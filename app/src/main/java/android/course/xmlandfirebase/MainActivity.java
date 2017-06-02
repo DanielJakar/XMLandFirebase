@@ -74,28 +74,39 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            getSupportFragmentManager().
-                    beginTransaction().
-                    replace(R.id.frame, new YnetArticleFragment())
-                    .commit();
+        switch (id) {
+            case R.id.nav_camera:
+                getSupportFragmentManager().
+                        beginTransaction().
+                        replace(R.id.frame, new YnetArticleFragment())
+                        .commit();
 
-        } else if (id == R.id.nav_gallery) {
+                break;
+            case R.id.nav_gallery:
+                getSupportFragmentManager().
+                        beginTransaction().
+                        replace(R.id.frame, new CurrencyFragment())
+                        .commit();
 
-        } else if (id == R.id.nav_slideshow) {
+                break;
+            case R.id.nav_slideshow:
 
-        } else if (id == R.id.nav_manage) {
+                break;
+            case R.id.nav_manage:
 
-        } else if (id == R.id.nav_share) {
+                break;
+            case R.id.nav_share:
 
-        } else if (id == R.id.nav_send) {
+                break;
+            case R.id.nav_send:
 
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
