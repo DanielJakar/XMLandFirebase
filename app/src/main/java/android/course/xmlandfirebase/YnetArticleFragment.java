@@ -21,18 +21,22 @@ import java.util.List;
  * <p/>
  * interface.
  */
-public class YnetArticleFragment extends Fragment {
+public class YnetArticleFragment extends Fragment implements YnetDataSource.onYnetArrivedLIstener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.fragment_ynetarticle, container, false);
 
-
+        YnetDataSource.getYnet(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(new YnetRecyclerAdapter(DummyContent.ITEMS));
 
         return recyclerView;
     }
 
+    @Override
+    public void onYnetArrived(List<YnetDataSource.Ynet> data, Exception e) {
+
+    }
 }

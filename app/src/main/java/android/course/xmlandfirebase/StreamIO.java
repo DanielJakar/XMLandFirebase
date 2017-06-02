@@ -10,6 +10,10 @@ import java.net.URLConnection;
  */
 public class StreamIO {
 
+    public static String read (InputStream in) throws IOException {
+        return read(in, "utf-8");
+    }
+
 
 
     public static void write(String fileName, String data) throws IOException {
@@ -72,24 +76,45 @@ public class StreamIO {
         return read(in);
     }
 
-    public static String read(InputStream in) throws IOException {
+//    public static String read(InputStream in) throws IOException {
+//        StringBuilder builder = new StringBuilder();//mutable String (appendable String)
+//        //A) wrap the inputStream in an InputStreamReader
+//        //B) wrap the reader in a buffered reader
+//        //C)read the data
+//        //D)close everything
+//        BufferedReader reader = null;
+//        try  {
+//            reader = new BufferedReader(new InputStreamReader(in));
+//            String line = null;
+//
+//            while ((line = reader.readLine()) != null) {
+//                builder.append(line).append(lineSeparator);
+//            }
+//        }finally {
+//            if (reader != null) {
+//                reader.close();
+//            }
+//        }
+//        return builder.toString();
+//    }
+
+    public static String read(InputStream in, String charset) throws IOException {
         StringBuilder builder = new StringBuilder();//mutable String (appendable String)
         //A) wrap the inputStream in an InputStreamReader
         //B) wrap the reader in a buffered reader
         //C)read the data
         //D)close everything
-        BufferedReader reader = null;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in, charset));
         try  {
-            reader = new BufferedReader(new InputStreamReader(in));
+
             String line = null;
 
             while ((line = reader.readLine()) != null) {
                 builder.append(line).append(lineSeparator);
             }
         }finally {
-            if (reader != null) {
                 reader.close();
-            }
+
         }
         return builder.toString();
     }
