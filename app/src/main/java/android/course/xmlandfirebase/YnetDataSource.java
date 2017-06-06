@@ -24,7 +24,7 @@ public class YnetDataSource {
         void onYnetArrived(List<Ynet> data, Exception e);
     }
 
-    public static void getYnet(onYnetArrivedLIstener lIstener){
+    public static void getYnet(final onYnetArrivedLIstener lIstener){
         //Service = Executor.newSingleThread
         ExecutorService service = Executors.newSingleThreadExecutor();
         //service-> run
@@ -37,11 +37,13 @@ public class YnetDataSource {
                     InputStream in = con.getInputStream();
                     String xml = StreamIO.read(in, "Windows-1255");
                     List<Ynet> data = parse (xml);
+                    lIstener.onYnetArrived(data, null);
 
                 }
 
             catch (Exception e ){
                 e.printStackTrace();
+                lIstener.onYnetArrived(null, e);
             }
 
             }
@@ -74,6 +76,7 @@ public class YnetDataSource {
             Ynet ynet = new Ynet(title, href, description, src);
             data.add(ynet);
             Log.d("Ness", ynet.toString());
+
 
 
         }
